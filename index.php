@@ -12,7 +12,7 @@
         <div class="container">
           <div class="row align-items-center justify-content-center text-center">
             <div class="col-md-10">
-              <span class="d-inline-block bg-success text-white px-3 mb-3 property-offer-type rounded"><?php echo $prop->type; ?></span>
+              <span class="d-inline-block bg-<?php if($prop->type=="rent") {echo "success";} else {echo "danger";}?> success text-white px-3 mb-3 property-offer-type rounded"><?php echo $prop->type; ?></span>
               <h1 class="mb-2"><?php echo $prop->name; ?></h1>
               <p class="mb-5"><strong class="h2 text-success font-weight-bold"><?php echo $prop->price; ?></strong></p>
               <p><a href="property-details.php?id=<?php echo $prop->id; ?>" class="btn btn-white btn-outline-white py-3 px-5 rounded-0 btn-2">See Details</a></p>
@@ -29,16 +29,16 @@
     <div class="site-section site-section-sm pb-0">
       <div class="container">
         <div class="row">
-          <form class="form-search col-md-12" style="margin-top: -100px;">
-            <div class="row  align-items-end">
+          <form class="form-search col-md-12" method="POST" action="search.php" style="margin-top: -100px;">
+            <div class="row align-items-end">
               <div class="col-md-3">
                 <label for="list-types">Listing Types</label>
                 <div class="select-wrap">
                   <span class="icon icon-arrow_drop_down"></span>
-                  <select name="list-types" id="list-types" class="form-control d-block rounded-0">
-                    <option value="">Condo</option>
-                    <option value="">Commercial Building</option>
-                    <option value="">Land Property</option>
+                  <select name="types" id="list-types" class="form-control d-block rounded-0">
+                    <option value="flat">Flat</option>
+                    <option value="commercial building">Commercial Building</option>
+                    <option value="land property">Land Property</option>
                   </select>
                 </div>
               </div>
@@ -46,10 +46,10 @@
                 <label for="offer-types">Offer Type</label>
                 <div class="select-wrap">
                   <span class="icon icon-arrow_drop_down"></span>
-                  <select name="offer-types" id="offer-types" class="form-control d-block rounded-0">
-                    <option value="">For Sale</option>
-                    <option value="">For Rent</option>
-                    <option value="">For Lease</option>
+                  <select name="offers" id="offer-types" class="form-control d-block rounded-0">
+                    <option value="sale">Sale</option>
+                    <option value="rent">Rent</option>
+                    <option value="lease">Lease</option>
                   </select>
                 </div>
               </div>
@@ -57,17 +57,17 @@
                 <label for="select-city">Select City</label>
                 <div class="select-wrap">
                   <span class="icon icon-arrow_drop_down"></span>
-                  <select name="select-city" id="select-city" class="form-control d-block rounded-0">
-                    <option value="">New York</option>
-                    <option value="">Brooklyn</option>
-                    <option value="">London</option>
-                    <option value="">Japan</option>
-                    <option value="">Philippines</option>
+                  <select name="cities" id="select-city" class="form-control d-block rounded-0">
+                    <option value="ahmedabad">Ahmedabad</option>
+                    <option value="mumbai">Mumbai</option>
+                    <option value="chennai">Chennai</option>
+                    <option value="calcutta">Calcutta</option>
+                    <option value="delhi">Delhi</option>
                   </select>
                 </div>
               </div>
               <div class="col-md-3">
-                <input type="submit" class="btn btn-success text-white btn-block rounded-0" value="Search">
+                <input type="submit" name="submit" class="btn btn-success text-white btn-block rounded-0" value="Search">
               </div>
             </div>
           </form>
@@ -111,7 +111,7 @@
         <div class="row mb-5">
           <div class="col-md-6 col-lg-4 mb-4">
             <div class="property-entry h-100">
-              <a href="property-details.html" class="property-thumbnail">
+              <a href="property-details.php" class="property-thumbnail">
                 <div class="offer-type-wrap">
                   <span class="offer-type bg-danger">Sale</span>
                   <span class="offer-type bg-success">Rent</span>
@@ -120,7 +120,7 @@
               </a>
               <div class="p-4 property-body">
                 <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
-                <h2 class="property-title"><a href="property-details.html">625 S. Berendo St</a></h2>
+                <h2 class="property-title"><a href="property-details.php">625 S. Berendo St</a></h2>
                 <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> 625 S. Berendo St Unit 607 Los Angeles, CA 90005</span>
                 <strong class="property-price text-primary mb-3 d-block text-success">$2,265,500</strong>
                 <ul class="property-specs-wrap mb-3 mb-lg-0">
@@ -147,7 +147,7 @@
 
           <div class="col-md-6 col-lg-4 mb-4">
             <div class="property-entry h-100">
-              <a href="property-details.html" class="property-thumbnail">
+              <a href="property-details.php" class="property-thumbnail">
                 <div class="offer-type-wrap">
                   <span class="offer-type bg-danger">Sale</span>
                   <span class="offer-type bg-success">Rent</span>
@@ -156,7 +156,7 @@
               </a>
               <div class="p-4 property-body">
                 <a href="#" class="property-favorite active"><span class="icon-heart-o"></span></a>
-                <h2 class="property-title"><a href="property-details.html">871 Crenshaw Blvd</a></h2>
+                <h2 class="property-title"><a href="property-details.php">871 Crenshaw Blvd</a></h2>
                 <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> 1 New York Ave, Warners Bay, NSW 2282</span>
                 <strong class="property-price text-primary mb-3 d-block text-success">$2,265,500</strong>
                 <ul class="property-specs-wrap mb-3 mb-lg-0">
@@ -183,7 +183,7 @@
 
           <div class="col-md-6 col-lg-4 mb-4">
             <div class="property-entry h-100">
-              <a href="property-details.html" class="property-thumbnail">
+              <a href="property-details.php" class="property-thumbnail">
                 <div class="offer-type-wrap">
                   <span class="offer-type bg-info">Lease</span>
                 </div>
@@ -191,7 +191,7 @@
               </a>
               <div class="p-4 property-body">
                 <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
-                <h2 class="property-title"><a href="property-details.html">853 S Lucerne Blvd</a></h2>
+                <h2 class="property-title"><a href="property-details.php">853 S Lucerne Blvd</a></h2>
                 <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> 853 S Lucerne Blvd Unit 101 Los Angeles, CA 90005</span>
                 <strong class="property-price text-primary mb-3 d-block text-success">$2,265,500</strong>
                 <ul class="property-specs-wrap mb-3 mb-lg-0">
@@ -218,7 +218,7 @@
 
           <div class="col-md-6 col-lg-4 mb-4">
             <div class="property-entry h-100">
-              <a href="property-details.html" class="property-thumbnail">
+              <a href="property-details.php" class="property-thumbnail">
                 <div class="offer-type-wrap">
                   <span class="offer-type bg-danger">Sale</span>
                   <span class="offer-type bg-success">Rent</span>
@@ -227,7 +227,7 @@
               </a>
               <div class="p-4 property-body">
                 <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
-                <h2 class="property-title"><a href="property-details.html">625 S. Berendo St</a></h2>
+                <h2 class="property-title"><a href="property-details.php">625 S. Berendo St</a></h2>
                 <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> 625 S. Berendo St Unit 607 Los Angeles, CA 90005</span>
                 <strong class="property-price text-primary mb-3 d-block text-success">$2,265,500</strong>
                 <ul class="property-specs-wrap mb-3 mb-lg-0">
@@ -254,7 +254,7 @@
 
           <div class="col-md-6 col-lg-4 mb-4">
             <div class="property-entry h-100">
-              <a href="property-details.html" class="property-thumbnail">
+              <a href="property-details.php" class="property-thumbnail">
                 <div class="offer-type-wrap">
                   <span class="offer-type bg-danger">Sale</span>
                   <span class="offer-type bg-success">Rent</span>
@@ -263,7 +263,7 @@
               </a>
               <div class="p-4 property-body">
                 <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
-                <h2 class="property-title"><a href="property-details.html">871 Crenshaw Blvd</a></h2>
+                <h2 class="property-title"><a href="property-details.php">871 Crenshaw Blvd</a></h2>
                 <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> 1 New York Ave, Warners Bay, NSW 2282</span>
                 <strong class="property-price text-primary mb-3 d-block text-success">$2,265,500</strong>
                 <ul class="property-specs-wrap mb-3 mb-lg-0">
@@ -290,7 +290,7 @@
 
           <div class="col-md-6 col-lg-4 mb-4">
             <div class="property-entry h-100">
-              <a href="property-details.html" class="property-thumbnail">
+              <a href="property-details.php" class="property-thumbnail">
                 <div class="offer-type-wrap">
                   <span class="offer-type bg-info">Lease</span>
                 </div>
@@ -298,7 +298,7 @@
               </a>
               <div class="p-4 property-body">
                 <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
-                <h2 class="property-title"><a href="property-details.html">853 S Lucerne Blvd</a></h2>
+                <h2 class="property-title"><a href="property-details.php">853 S Lucerne Blvd</a></h2>
                 <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> 853 S Lucerne Blvd Unit 101 Los Angeles, CA 90005</span>
                 <strong class="property-price text-primary mb-3 d-block text-success">$2,265,500</strong>
                 <ul class="property-specs-wrap mb-3 mb-lg-0">
@@ -325,7 +325,7 @@
 
           <div class="col-md-6 col-lg-4 mb-4">
             <div class="property-entry h-100">
-              <a href="property-details.html" class="property-thumbnail">
+              <a href="property-details.php" class="property-thumbnail">
                 <div class="offer-type-wrap">
                   <span class="offer-type bg-danger">Sale</span>
                   <span class="offer-type bg-success">Rent</span>
@@ -334,7 +334,7 @@
               </a>
               <div class="p-4 property-body">
                 <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
-                <h2 class="property-title"><a href="property-details.html">625 S. Berendo St</a></h2>
+                <h2 class="property-title"><a href="property-details.php">625 S. Berendo St</a></h2>
                 <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> 625 S. Berendo St Unit 607 Los Angeles, CA 90005</span>
                 <strong class="property-price text-primary mb-3 d-block text-success">$2,265,500</strong>
                 <ul class="property-specs-wrap mb-3 mb-lg-0">
@@ -361,7 +361,7 @@
 
           <div class="col-md-6 col-lg-4 mb-4">
             <div class="property-entry h-100">
-              <a href="property-details.html" class="property-thumbnail">
+              <a href="property-details.php" class="property-thumbnail">
                 <div class="offer-type-wrap">
                   <span class="offer-type bg-danger">Sale</span>
                   <span class="offer-type bg-success">Rent</span>
@@ -370,7 +370,7 @@
               </a>
               <div class="p-4 property-body">
                 <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
-                <h2 class="property-title"><a href="property-details.html">871 Crenshaw Blvd</a></h2>
+                <h2 class="property-title"><a href="property-details.php">871 Crenshaw Blvd</a></h2>
                 <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> 1 New York Ave, Warners Bay, NSW 2282</span>
                 <strong class="property-price text-primary mb-3 d-block text-success">$2,265,500</strong>
                 <ul class="property-specs-wrap mb-3 mb-lg-0">
@@ -397,7 +397,7 @@
 
           <div class="col-md-6 col-lg-4 mb-4">
             <div class="property-entry h-100">
-              <a href="property-details.html" class="property-thumbnail">
+              <a href="property-details.php" class="property-thumbnail">
                 <div class="offer-type-wrap">
                   <span class="offer-type bg-info">Lease</span>
                 </div>
@@ -405,7 +405,7 @@
               </a>
               <div class="p-4 property-body">
                 <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
-                <h2 class="property-title"><a href="property-details.html">853 S Lucerne Blvd</a></h2>
+                <h2 class="property-title"><a href="property-details.php">853 S Lucerne Blvd</a></h2>
                 <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> 853 S Lucerne Blvd Unit 101 Los Angeles, CA 90005</span>
                 <strong class="property-price text-primary mb-3 d-block text-success">$2,265,500</strong>
                 <ul class="property-specs-wrap mb-3 mb-lg-0">

@@ -60,7 +60,7 @@
                   <li class="has-children">
                     <a href="properties.html">Properties</a>
                     <ul class="dropdown arrow-top">
-                      <li><a href="#">Condo</a></li>
+                      <li><a href="#">Flat</a></li>
                       <li><a href="#">Property Land</a></li>
                       <li><a href="#">Commercial Building</a></li>
                      
