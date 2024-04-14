@@ -52,9 +52,9 @@
                 <div class="select-wrap">
                   <span class="icon icon-arrow_drop_down"></span>
                   <select name="types" id="list-types" class="form-control d-block rounded-0">
-                    <option value="">Flat</option>
-                    <option value="">Commercial Building</option>
-                    <option value="">Land Property</option>
+                    <option value="flat">Flat</option>
+                    <option value="commercial building">Commercial Building</option>
+                    <option value="land property">Land Property</option>
                   </select>
                 </div>
               </div>
@@ -63,9 +63,9 @@
                 <div class="select-wrap">
                   <span class="icon icon-arrow_drop_down"></span>
                   <select name="offers" id="offer-types" class="form-control d-block rounded-0">
-                    <option value="">Sale</option>
-                    <option value="">Rent</option>
-                    <option value="">Lease</option>
+                    <option value="sale">Sale</option>
+                    <option value="rent">Rent</option>
+                    <option value="lease">Lease</option>
                   </select>
                 </div>
               </div>
@@ -89,34 +89,6 @@
           </form>
         </div>  
 
-        <div class="row">
-          <div class="col-md-12">
-            <div class="view-options bg-white py-3 px-3 d-md-flex align-items-center">
-              <div class="mr-auto">
-                <a href="index.php" class="icon-view view-module active"><span class="icon-view_module"></span></a>
-                <a href="view-list.html" class="icon-view view-list"><span class="icon-view_list"></span></a>
-                
-              </div>
-              <div class="ml-auto d-flex align-items-center">
-                <div>
-                  <a href="#" class="view-list px-3 border-right active">All</a>
-                  <a href="#" class="view-list px-3 border-right">Rent</a>
-                  <a href="#" class="view-list px-3">Sale</a>
-                </div>
-
-
-                <div class="select-wrap">
-                  <span class="icon icon-arrow_drop_down"></span>
-                  <select class="form-control form-control-sm d-block rounded-0">
-                    <option value="">Sort by</option>
-                    <option value="">Price Ascending</option>
-                    <option value="">Price Descending</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
        
       </div>
     </div>
@@ -136,7 +108,6 @@
                         <img src="images/<?php echo $listing->image; ?>" alt="Image" class="img-fluid">
                     </a>
                     <div class="p-4 property-body">
-                        <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
                         <h2 class="property-title"><a href="property-details.php?id=<?php echo $listing->id; ?>"><?php echo $listing->name; ?></a></h2>
                         <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span><?php echo $listing->location; ?></span>
                         <strong class="property-price text-primary mb-3 d-block text-success"><?php echo $listing->price; ?></strong>

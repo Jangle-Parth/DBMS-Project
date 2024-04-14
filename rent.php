@@ -1,9 +1,17 @@
 <?php require "includes/header.php";?>
 <?php require "config/config.php";?>
+  
   <?php
     $select=$conn->query("SELECT * FROM props ORDER BY name DESC");
     $select->execute();
     $props=$select->fetchAll(PDO::FETCH_OBJ);
+
+    if(isset($_GET['type'])){
+      $id=$_GET['type'];
+      $rent=$conn->query("SELECT * FROM props WHERE type='$id'");
+      $rent->execute();
+      $allistings=$rent->fetchAll(PDO::FETCH_OBJ);
+    }
 
   ?>
 
@@ -104,34 +112,34 @@
       <div class="container">
       
         <div class="row mb-5">
-          <?php foreach($props as $prop) : ?>
+          <?php foreach($allistings as $allisting) : ?>
             <div class="col-md-6 col-lg-4 mb-4">
             <div class="property-entry h-100">
-              <a href="property-details.php?id=<?php echo $prop->id; ?>" class="property-thumbnail">
+              <a href="property-details.php?id=<?php echo $allisting->id; ?>" class="property-thumbnail">
                 <div class="offer-type-wrap">
-                  <span class="offer-type bg-danger"><?php echo $prop->type; ?></span>
+                  <span class="offer-type bg-danger"><?php echo $allisting->type; ?></span>
                 </div>
-                <img src="images/<?php echo $prop->image; ?>" alt="Image" class="img-fluid">
+                <img src="images/<?php echo $allisting->image; ?>" alt="Image" class="img-fluid">
               </a>
               <div class="p-4 property-body">
                 <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
-                <h2 class="property-title"><a href="property-details.php?id=<?php echo $prop->id; ?>"><?php echo $prop->name; ?></a></h2>
-                <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> <?php echo $prop->location; ?></span>
-                <strong class="property-price text-primary mb-3 d-block text-success"><?php echo $prop->price; ?></strong>
+                <h2 class="property-title"><a href="property-details.php?id=<?php echo $allisting->id; ?>"><?php echo $allisting->name; ?></a></h2>
+                <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> <?php echo $allisting->location; ?></span>
+                <strong class="property-price text-primary mb-3 d-block text-success"><?php echo $allisting->price; ?></strong>
                 <ul class="property-specs-wrap mb-3 mb-lg-0">
                   <li>
                     <span class="property-specs">Beds</span>
-                    <span class="property-specs-number"><?php echo $prop->beds; ?></span>
+                    <span class="property-specs-number"><?php echo $allisting->beds; ?></span>
                     
                   </li>
                   <li>
                     <span class="property-specs">Baths</span>
-                    <span class="property-specs-number"><?php echo $prop->bath; ?></span>
+                    <span class="property-specs-number"><?php echo $allisting->bath; ?></span>
                     
                   </li>
                   <li>
                     <span class="property-specs">SQ FT</span>
-                    <span class="property-specs-number"><?php echo $prop->sqft; ?></span>
+                    <span class="property-specs-number"><?php echo $allisting->sqft; ?></span>
                     
                   </li>
                 </ul>
@@ -140,9 +148,9 @@
             </div>
           
             
-          
-          </div>
           <?php endforeach; ?> 
+          </div>
+
         </div>
         
         
@@ -188,47 +196,6 @@
         </div>
       </div>
     </div>
-
-    <!-- <div class="site-section bg-light">
-      <div class="container">
-        <div class="row justify-content-center mb-5">
-          <div class="col-md-7 text-center">
-            <div class="site-section-title">
-              <h2>Recent Blog</h2>
-            </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis maiores quisquam saepe architecto error corporis aliquam. Cum ipsam a consectetur aut sunt sint animi, pariatur corporis, eaque, deleniti cupiditate officia.</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">
-            <a href="#"><img src="images/img_4.jpg" alt="Image" class="img-fluid"></a>
-            <div class="p-4 bg-white">
-              <span class="d-block text-secondary small text-uppercase">Jan 20th, 2019</span>
-              <h2 class="h5 text-black mb-3"><a href="#">Art Gossip by Mike Charles</a></h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias enim, ipsa exercitationem veniam quae sunt.</p>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="200">
-            <a href="#"><img src="images/img_2.jpg" alt="Image" class="img-fluid"></a>
-            <div class="p-4 bg-white">
-              <span class="d-block text-secondary small text-uppercase">Jan 20th, 2019</span>
-              <h2 class="h5 text-black mb-3"><a href="#">Art Gossip by Mike Charles</a></h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias enim, ipsa exercitationem veniam quae sunt.</p>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="300">
-            <a href="#"><img src="images/img_3.jpg" alt="Image" class="img-fluid"></a>
-            <div class="p-4 bg-white">
-              <span class="d-block text-secondary small text-uppercase">Jan 20th, 2019</span>
-              <h2 class="h5 text-black mb-3"><a href="#">Art Gossip by Mike Charles</a></h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias enim, ipsa exercitationem veniam quae sunt.</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </div> -->
 
     
     <div class="site-section bg-light">
