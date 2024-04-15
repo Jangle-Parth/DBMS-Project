@@ -1,5 +1,5 @@
-<?php require "includes/header.php";?>
-<?php require "config/config.php";?>
+<?php require "../includes/header.php";?>
+<?php require "../config/config.php";?>
   <?php
     $select=$conn->query("SELECT * FROM props ORDER BY name DESC");
     $select->execute();
@@ -33,7 +33,7 @@
   
     <div class="slide-one-item home-slider owl-carousel">
     <?php foreach ($props as $prop) : ?>
-      <div class="site-blocks-cover overlay" style="background-image: url(images/<?php echo $prop->image; ?>);" data-aos="fade" data-stellar-background-ratio="0.5">
+      <div class="site-blocks-cover overlay" style="background-image: url(<?php echo APPURL; ?>/images/<?php echo $prop->image; ?>);" data-aos="fade" data-stellar-background-ratio="0.5">
         <div class="container">
           <div class="row align-items-center justify-content-center text-center">
             <div class="col-md-10">
@@ -125,34 +125,34 @@
       <div class="container">
       
         <div class="row mb-5">
-          <?php foreach($allistingsPrice as $allisting) : ?>
+          <?php foreach($allsingleCategory as $homeType) : ?>
             <div class="col-md-6 col-lg-4 mb-4">
             <div class="property-entry h-100">
-              <a href="property-details.php?id=<?php echo $allisting->id; ?>" class="property-thumbnail">
+              <a href="property-details.php?id=<?php echo $homeType->id; ?>" class="property-thumbnail">
                 <div class="offer-type-wrap">
-                  <span class="offer-type bg-danger"><?php echo $allisting->type; ?></span>
+                  <span class="offer-type bg-danger"><?php echo $homeType->type; ?></span>
                 </div>
-                <img src="images/<?php echo $allisting->image; ?>" alt="Image" class="img-fluid">
+                <img src="<?php echo APPURL; ?>/images/<?php echo $homeType->image; ?>" alt="Image" class="img-fluid">
               </a>
               <div class="p-4 property-body">
                 <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
-                <h2 class="property-title"><a href="property-details.php?id=<?php echo $allisting->id; ?>"><?php echo $allisting->name; ?></a></h2>
-                <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> <?php echo $allisting->location; ?></span>
-                <strong class="property-price text-primary mb-3 d-block text-success"><?php echo $allisting->price; ?></strong>
+                <h2 class="property-title"><a href="property-details.php?id=<?php echo $homeType->id; ?>"><?php echo $homeType->name; ?></a></h2>
+                <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> <?php echo $homeType->location; ?></span>
+                <strong class="property-price text-primary mb-3 d-block text-success"><?php echo $homeType->price; ?></strong>
                 <ul class="property-specs-wrap mb-3 mb-lg-0">
                   <li>
                     <span class="property-specs">Beds</span>
-                    <span class="property-specs-number"><?php echo $allisting->beds; ?></span>
+                    <span class="property-specs-number"><?php echo $homeType->beds; ?></span>
                     
                   </li>
                   <li>
                     <span class="property-specs">Baths</span>
-                    <span class="property-specs-number"><?php echo $allisting->bath; ?></span>
+                    <span class="property-specs-number"><?php echo $homeType->bath; ?></span>
                     
                   </li>
                   <li>
                     <span class="property-specs">SQ FT</span>
-                    <span class="property-specs-number"><?php echo $allisting->sqft; ?></span>
+                    <span class="property-specs-number"><?php echo $homeType->sqft; ?></span>
                     
                   </li>
                 </ul>
@@ -224,7 +224,7 @@
           <div class="col-md-6 col-lg-4 mb-5 mb-lg-5">
             <div class="team-member">
 
-              <img src="images/person_1.jpg" alt="Image" class="img-fluid rounded mb-4">
+              <img src="<?php echo APPURL; ?>/images/person_1.jpg" alt="Image" class="img-fluid rounded mb-4">
 
               <div class="text">
 
@@ -285,4 +285,4 @@
 
         </div>
     </div>
-    <?php require "includes/footer.php";?>
+    <?php require "../includes/footer.php";?>

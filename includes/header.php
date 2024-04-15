@@ -53,7 +53,7 @@
         <div class="container py-1">
           <div class="row align-items-center">
             <div class="col-8 col-md-8 col-lg-4">
-              <h1 class="mb-0"><a href="index.php" class="text-white h2 mb-0"><strong>Homeland<span class="text-danger">.</span></strong></a></h1>
+              <h1 class="mb-0"><a href="<?php echo APPURL; ?>/index.php" class="text-white h2 mb-0"><strong>Homeland<span class="text-danger">.</span></strong></a></h1>
             </div>
             <div class="col-4 col-md-4 col-lg-8">
               <nav class="site-navigation text-right text-md-right" role="navigation">
@@ -70,11 +70,11 @@
                     <a href="#">Properties</a>
                     <ul class="dropdown arrow-top">
                     <?php foreach($allcategories as $category) : ?>
-                      <li><a href="<?php echo APPURL; ?>/category.php?name=<?php echo $category->name; ?>"><?php echo str_replace('-',' ',$category->name); ?></a></li>
+                      <li><a href="<?php echo APPURL; ?>/categories/category.php?name=<?php echo $category->name; ?>"><?php echo str_replace('-',' ',$category->name); ?></a></li>
                     <?php endforeach; ?>
                     </ul>
                   </li>
-                  <li><a href="about.html">About</a></li>
+                  <li><a href="<?php echo APPURL; ?>/about.php">About</a></li>
                   <li><a href="<?php echo APPURL; ?>/contact.php">Contact</a></li>
                   
                   <?php if(isset($_SESSION['username'])) : ?>
