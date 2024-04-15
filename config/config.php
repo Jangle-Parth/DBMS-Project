@@ -1,10 +1,10 @@
 <?php
 
 try{
-    define("HOSTNAME","localhost:3307");
-    define("DBNAME","homeland");
-    define("USER","root");
-    define("PASS","");
+    if(!defined('HOSTNAME')) define("HOSTNAME","localhost:3307");
+    if(!defined('DBNAME')) define("DBNAME","homeland");
+    if(!defined('USER')) define("USER","root");
+    if(!defined('PASS')) define("PASS","");
 
     $conn = new PDO("mysql:host=".HOSTNAME.";dbname=".DBNAME.";",USER,PASS);
     $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
@@ -12,7 +12,7 @@ try{
     //     echo"DB Connected";
     // }
     } catch(PDOException $e){
-        die("DB Connection Failed: ". $e->getMessage());
+        die("DB Connection Failed: ". $e->getMessage()); 
     }
 
     

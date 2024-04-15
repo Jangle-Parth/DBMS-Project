@@ -1,6 +1,11 @@
 <?php
   session_start();
   define("APPURL","http://localhost/dbms_project");
+  require "C:/xampp/htdocs/dbms_project/config/config.php";
+
+  $categories=$conn->query("SELECT * FROM categories ORDER BY name DESC");
+  $categories->execute();
+  $allcategories=$categories->fetchAll(PDO::FETCH_OBJ); 
 ?>
 
 <!DOCTYPE html>
@@ -62,11 +67,11 @@
                   <li><a href="<?php echo APPURL; ?>/sale.php?type=sale">Buy</a></li>
                   <li><a href="<?php echo APPURL; ?>/rent.php?type=rent">Rent</a></li>
                   <li class="has-children">
-                    <a href="properties.html">Properties</a>
+                    <a href="#">Properties</a>
                     <ul class="dropdown arrow-top">
-                      <li><a href="#">Flat</a></li>
-                      <li><a href="#">Property Land</a></li>
-                      <li><a href="#">Commercial Building</a></li>
+                    <?php foreach($allcategories as $category) : ?>
+                      <li><a href="<?php echo APPURL; ?>/category.php?name=<?php echo $category->name; ?>"><?php echo str_replace('-',' ',$category->name); ?></a></li>
+                    <?php endforeach; ?>
                     </ul>
                   </li>
                   <li><a href="about.html">About</a></li>

@@ -4,7 +4,6 @@
     $select=$conn->query("SELECT * FROM props ORDER BY name DESC");
     $select->execute();
     $props=$select->fetchAll(PDO::FETCH_OBJ);
-
   ?>
 
 
@@ -39,9 +38,9 @@
                 <div class="select-wrap">
                   <span class="icon icon-arrow_drop_down"></span>
                   <select name="types" id="list-types" class="form-control d-block rounded-0">
-                    <option value="flat">Flat</option>
-                    <option value="commercial building">Commercial Building</option>
-                    <option value="land property">Land Property</option>
+                    <?php foreach($allcategories as $category) : ?>
+                      <option value="<?php echo $category->name; ?>"><?php echo str_replace('-',' ',$category->name); ?></option>
+                    <?php endforeach; ?>
                   </select>
                 </div>
               </div>
@@ -81,8 +80,6 @@
             <div class="view-options bg-white py-3 px-3 d-md-flex align-items-center">
               <div class="mr-auto">
                 <a href="index.php" class="icon-view view-module active"><span class="icon-view_module"></span></a>
-                <a href="view-list.html" class="icon-view view-list"><span class="icon-view_list"></span></a>
-                
               </div>
               <div class="ml-auto d-flex align-items-center">
                 <div>
