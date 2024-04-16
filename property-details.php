@@ -14,6 +14,11 @@
     $images=$conn->query("SELECT * FROM related_images WHERE prop_id='$id'");
     $images->execute();
     $allImages=$images->fetchAll(PDO::FETCH_OBJ);
+
+
+    $check=$conn->query("SELECT * FROM favs WHERE prop_id='$id' AND user_id='{$_SESSION['id']}'");
+    $check->execute();
+    $fetch_check=$check->fetch(PDO::FETCH_OBJ);
 ?> 
 
 
@@ -134,24 +139,28 @@
               </div>            
         </div>
 
-        <div class="bg-white widget border rounded">
-          <h3 class="h4 text-black widget-title mb-3 ml-0">ADD THIS TO FAVORITE</h3>
+        <!-- <div class="bg-white widget border rounded"> -->
+          <!-- <h3 class="h4 text-black widget-title mb-3 ml-0">ADD THIS TO FAVORITE</h3> -->
               <div class="px-3" style="margin-left: -15px;">
                 <form action="addfav.php" class="form-contact-agent" method="POST">
                   <div class="form-group">
-                    <label for="name">prop_id</label>
-                    <input type="text" id="name" name="prop_id" value="<?php echo $id; ?>" class="form-control">
+                    <input type="hidden" id="name" name="prop_id" value="<?php echo $id; ?>" class="form-control">
                   </div>
                   <div class="form-group">
-                    <label for="email">user_id</label>
-                    <input type="email" id="email" name="user_id" value="<?php echo $_SESSION['user_id']; ?>" class="form-control">
+                    <input type="hidden" id="email" name="user_id" value="<?php echo isset($_SESSION['id']) ? $_SESSION['id'] : 'PLS LOGIN FIRST'; ?>" class="form-control">
                   </div>
+                  <?php if($check->rowCount()>0) : ?>
                   <div class="form-group">
+                    <input type="submit" name="submit" id="phone" class="btn btn-primary" value="Added to Favorite" disabled>
+                  </div>
+                  <?php else : ?>
+                    <div class="form-group">
                     <input type="submit" name="submit" id="phone" class="btn btn-primary" value="Add to Favorite">
-                  </div>
+                    </div>
+                  <?php endif; ?>
                 </form>
               </div>            
-        </div>
+        <!-- </div> -->
 
       </div>
       

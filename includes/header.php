@@ -79,7 +79,7 @@
                   
                   <?php if(isset($_SESSION['username'])) : ?>
                     <li class="has-children">
-                      <a href="properties.html"><?php echo $_SESSION['username']; ?></a>
+                      <a href="properties.html"><?php echo $_SESSION['username']; ?> &nbsp; &nbsp;  </a>
                       <ul class="dropdown arrow-top">
                         <li><a href="<?php echo APPURL; ?>/auth/logout.php">LogOut</a></li>   
                       </ul>
