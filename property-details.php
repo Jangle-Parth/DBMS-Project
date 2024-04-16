@@ -142,16 +142,16 @@
         <!-- <div class="bg-white widget border rounded"> -->
           <!-- <h3 class="h4 text-black widget-title mb-3 ml-0">ADD THIS TO FAVORITE</h3> -->
               <div class="px-3" style="margin-left: -15px;">
-                <form action="addfav.php" class="form-contact-agent" method="POST">
+                <form action="favs/add-fav.php" class="form-contact-agent" method="POST">
                   <div class="form-group">
                     <input type="hidden" id="name" name="prop_id" value="<?php echo $id; ?>" class="form-control">
                   </div>
                   <div class="form-group">
-                    <input type="hidden" id="email" name="user_id" value="<?php echo isset($_SESSION['id']) ? $_SESSION['id'] : 'PLS LOGIN FIRST'; ?>" class="form-control">
+                    <input type="hidden" id="email" name="user_id" value="<?php echo isset($_SESSION['id']) ? $_SESSION['id'] : 's'; ?>" class="form-control">
                   </div>
                   <?php if($check->rowCount()>0) : ?>
                   <div class="form-group">
-                    <input type="submit" name="submit" id="phone" class="btn btn-primary" value="Added to Favorite" disabled>
+                    <a href="favs/delete-fav.php?prop_id=<?php echo $id; ?>&user_id=<?php echo isset($_SESSION['id']) ? $_SESSION['id'] : ''; ?>" class="btn btn-primary" text-white>Delete From Favorite</a>
                   </div>
                   <?php else : ?>
                     <div class="form-group">
