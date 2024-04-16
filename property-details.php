@@ -4,6 +4,9 @@
 <?php
   if(isset($_GET['id'])){
     $id=$_GET['id'];
+
+
+
     $single=$conn->query("SELECT * FROM props WHERE id='$id'");
     $single->execute();
     $allDetails=$single->fetch(PDO::FETCH_OBJ); 
@@ -15,10 +18,14 @@
     $images->execute();
     $allImages=$images->fetchAll(PDO::FETCH_OBJ);
 
-
-    $check=$conn->query("SELECT * FROM favs WHERE prop_id='$id' AND user_id='{$_SESSION['id']}'");
+    if(isset($_SESSION['id'])){
+    $check=$conn->query("SELECT * FROM favs WHERE prop_id='$id' AND user_id='$_SESSION[id]'");
     $check->execute();
-    $fetch_check=$check->fetch(PDO::FETCH_OBJ);
+    }
+
+    $check_request=$conn->query("SELECT * FROM requests WHERE prop_id='$id' AND user_id='$_SESSION[id]'");
+    $check_request->execute();
+      
 ?> 
 
 
@@ -111,23 +118,36 @@
         <div class="bg-white widget border rounded">
 
           <h3 class="h4 text-black widget-title mb-3">Contact Agent</h3>
-          <form action="" class="form-contact-agent">
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" id="name" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="phone">Phone</label>
-              <input type="text" id="phone" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="submit" id="phone" class="btn btn-primary" value="Send Message">
-            </div>
-          </form>
+          <?php if(isset($_SESSION['user_id'])) :?>
+            <form action="requests/process-request.php" method="POST" class="form-contact-agent">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" name="phone" id="phone" class="form-control">
+              </div>
+              <div class="form-group">
+                <input type="hidden" name="prop_id" value="<?php echo $id; ?>" id="prop_id" class="form-control">
+              </div>
+              <div class="form-group">
+                <input type="hidden" name="user_id" value="<?php echo $_SESSION['id']; ?>" id="user_id" class="form-control">
+              </div>
+              <div class="form-group">
+                <input type="hidden" name="admin_name" value="<?php echo $allDetails->admin_name; ?>" id="admin_name" class="form-control">
+              </div>
+              <div class="form-group">
+                <input type="submit" name="submit" id="phone" class="btn btn-primary" value="Send Message">
+              </div>
+            </form>
+          <?php else : ?>
+            <p>Log in First to Send Request</p>
+          <?php endif; ?>
         </div>
 
         <div class="bg-white widget border rounded">
@@ -142,23 +162,32 @@
         <!-- <div class="bg-white widget border rounded"> -->
           <!-- <h3 class="h4 text-black widget-title mb-3 ml-0">ADD THIS TO FAVORITE</h3> -->
               <div class="px-3" style="margin-left: -15px;">
-                <form action="favs/add-fav.php" class="form-contact-agent" method="POST">
-                  <div class="form-group">
-                    <input type="hidden" id="name" name="prop_id" value="<?php echo $id; ?>" class="form-control">
-                  </div>
-                  <div class="form-group">
-                    <input type="hidden" id="email" name="user_id" value="<?php echo isset($_SESSION['id']) ? $_SESSION['id'] : 's'; ?>" class="form-control">
-                  </div>
-                  <?php if($check->rowCount()>0) : ?>
-                  <div class="form-group">
-                    <a href="favs/delete-fav.php?prop_id=<?php echo $id; ?>&user_id=<?php echo isset($_SESSION['id']) ? $_SESSION['id'] : ''; ?>" class="btn btn-primary" text-white>Delete From Favorite</a>
-                  </div>
-                  <?php else : ?>
+              <?php if(isset($_SESSION['user_id'])) :?>
+                <?php if($check_request->rowCount()>0) :?>
+                  <p>Request Already Sent</p>
+
+                <?php else: ?>
+                  <form action="favs/add-fav.php" class="form-contact-agent" method="POST">
                     <div class="form-group">
-                    <input type="submit" name="submit" id="phone" class="btn btn-primary" value="Add to Favorite">
+                      <input type="hidden" id="name" name="prop_id" value="<?php echo $id; ?>" class="form-control">
                     </div>
+                    <div class="form-group">
+                      <input type="hidden" id="email" name="user_id" value="<?php echo isset($_SESSION['id']) ? $_SESSION['id'] : 's'; ?>" class="form-control">
+                    </div>
+                    <?php if($check->rowCount()>0) : ?>
+                    <div class="form-group">
+                      <a href="favs/delete-fav.php?prop_id=<?php echo $id; ?>&user_id=<?php echo isset($_SESSION['id']) ? $_SESSION['id'] : ''; ?>" class="btn btn-primary" text-white>Delete From Favorite</a>
+                    </div>
+                    <?php else : ?>
+                      <div class="form-group">
+                      <input type="submit" name="submit" id="phone" class="btn btn-primary" value="Send Request">
+                      </div>
+                    <?php endif; ?>
+                  </form>
                   <?php endif; ?>
-                </form>
+                  <?php else: ?>
+                    <p> Pls Login To add this Property to Favorite</p>
+                  <?php endif; ?>
               </div>            
         <!-- </div> -->
 

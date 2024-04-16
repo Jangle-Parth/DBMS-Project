@@ -11,3 +11,5 @@
     
           echo "<script>window.location.href='".APPURL."/property-details.php?id=$prop_id'</script>";
     }
+
+    ?>
