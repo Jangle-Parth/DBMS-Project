@@ -127,7 +127,6 @@
                 <img src="images/<?php echo $allisting->image; ?>" alt="Image" class="img-fluid">
               </a>
               <div class="p-4 property-body">
-                <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
                 <h2 class="property-title"><a href="property-details.php?id=<?php echo $allisting->id; ?>"><?php echo $allisting->name; ?></a></h2>
                 <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> <?php echo $allisting->location; ?></span>
                 <strong class="property-price text-primary mb-3 d-block text-success"><?php echo $allisting->price; ?></strong>

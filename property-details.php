@@ -6,8 +6,14 @@
     $id=$_GET['id'];
     $single=$conn->query("SELECT * FROM props WHERE id='$id'");
     $single->execute();
-    $allDetails=$single->fetch(PDO::FETCH_OBJ);    
+    $allDetails=$single->fetch(PDO::FETCH_OBJ); 
+    $relatedProps=$conn->query("SELECT * FROM props WHERE home_type='$allDetails->home_type' AND id !='$id'");
+    $relatedProps->execute();
+    $allRelatedProps=$relatedProps->fetchAll(PDO::FETCH_OBJ);    
 }
+    $images=$conn->query("SELECT * FROM related_images WHERE prop_id='$id'");
+    $images->execute();
+    $allImages=$images->fetchAll(PDO::FETCH_OBJ);
 ?> 
 
 
@@ -32,9 +38,9 @@
       <div class="col-lg-8">
         <div>
           <div class="slide-one-item home-slider owl-carousel">
-            <div><img src="images/hero_bg_1.jpg" alt="Image" class="img-fluid"></div>
-            <div><img src="images/hero_bg_2.jpg" alt="Image" class="img-fluid"></div>
-            <div><img src="images/hero_bg_3.jpg" alt="Image" class="img-fluid"></div>
+            <?php foreach($allImages as $image) : ?>
+              <div><img src="images/<?php echo $image->image; ?>" alt="Image" class="img-fluid"></div>
+            <?php endforeach; ?>
           </div>
         </div>
         <div class="bg-white property-body border-bottom border-left border-right">
@@ -85,42 +91,13 @@
             <div class="col-12">
               <h2 class="h4 text-black mb-3">Gallery</h2>
             </div>
-            <div class="col-sm-6 col-md-4 col-lg-3">
-              <a href="images/img_1.jpg" class="image-popup gal-item"><img src="images/img_1.jpg" alt="Image" class="img-fluid"></a>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3">
-              <a href="images/img_2.jpg" class="image-popup gal-item"><img src="images/img_2.jpg" alt="Image" class="img-fluid"></a>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3">
-              <a href="images/img_3.jpg" class="image-popup gal-item"><img src="images/img_3.jpg" alt="Image" class="img-fluid"></a>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3">
-              <a href="images/img_4.jpg" class="image-popup gal-item"><img src="images/img_4.jpg" alt="Image" class="img-fluid"></a>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3">
-              <a href="images/img_5.jpg" class="image-popup gal-item"><img src="images/img_5.jpg" alt="Image" class="img-fluid"></a>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3">
-              <a href="images/img_6.jpg" class="image-popup gal-item"><img src="images/img_6.jpg" alt="Image" class="img-fluid"></a>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3">
-              <a href="images/img_7.jpg" class="image-popup gal-item"><img src="images/img_7.jpg" alt="Image" class="img-fluid"></a>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3">
-              <a href="images/img_8.jpg" class="image-popup gal-item"><img src="images/img_8.jpg" alt="Image" class="img-fluid"></a>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3">
-              <a href="images/img_1.jpg" class="image-popup gal-item"><img src="images/img_1.jpg" alt="Image" class="img-fluid"></a>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3">
-              <a href="images/img_2.jpg" class="image-popup gal-item"><img src="images/img_2.jpg" alt="Image" class="img-fluid"></a>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3">
-              <a href="images/img_3.jpg" class="image-popup gal-item"><img src="images/img_3.jpg" alt="Image" class="img-fluid"></a>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3">
-              <a href="images/img_4.jpg" class="image-popup gal-item"><img src="images/img_4.jpg" alt="Image" class="img-fluid"></a>
-            </div>
+            <?php foreach($allImages as $image) : ?>
+              <div class="col-sm-6 col-md-4 col-lg-3">
+                <a href="images/<?php echo $image->image; ?>" class="image-popup gal-item"><img src="images/<?php echo $image->image; ?>" alt="Image" class="img-fluid"></a>
+              </div>
+            <?php endforeach; ?>
+          
+          
           </div>
         </div>
       </div>
@@ -157,6 +134,25 @@
               </div>            
         </div>
 
+        <div class="bg-white widget border rounded">
+          <h3 class="h4 text-black widget-title mb-3 ml-0">ADD THIS TO FAVORITE</h3>
+              <div class="px-3" style="margin-left: -15px;">
+                <form action="addfav.php" class="form-contact-agent" method="POST">
+                  <div class="form-group">
+                    <label for="name">prop_id</label>
+                    <input type="text" id="name" name="prop_id" value="<?php echo $id; ?>" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="email">user_id</label>
+                    <input type="email" id="email" name="user_id" value="<?php echo $_SESSION['user_id']; ?>" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <input type="submit" name="submit" id="phone" class="btn btn-primary" value="Add to Favorite">
+                  </div>
+                </form>
+              </div>            
+        </div>
+
       </div>
       
     </div>
@@ -175,111 +171,38 @@
     </div>
   
     <div class="row mb-5">
-      <div class="col-md-6 col-lg-4 mb-4">
-        <div class="property-entry h-100">
-          <a href="property-details.php" class="property-thumbnail">
-            <div class="offer-type-wrap">
-              <span class="offer-type bg-danger">Sale</span>
-              <span class="offer-type bg-success">Rent</span>
+      <?php foreach ($allRelatedProps as $allRelatedProp) : ?>
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="property-entry h-100">
+            <a href="property-details.php?id=<?php echo $allRelatedProp->id; ?>" class="property-thumbnail">
+              <div class="offer-type-wrap">
+                <span class="offer-type bg-<?php if($allRelatedProp->type=="rent") {echo "success";} else {echo "danger";}?>"><?php echo $allRelatedProp->type; ?></span>
+              </div>
+              <img src="images/<?php echo $allRelatedProp->image; ?>" alt="Image" class="img-fluid">
+            </a>
+            <div class="p-4 property-body">
+              <h2 class="property-title"><a href="property-details.php"><?php echo $allRelatedProp->name; ?></a></h2>
+              <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> <?php echo $allRelatedProp->location; ?></span>
+              <strong class="property-price text-primary mb-3 d-block text-success"><?php echo $allRelatedProp->price; ?></strong>
+              <ul class="property-specs-wrap mb-3 mb-lg-0">
+                <li>
+                  <span class="property-specs">Beds</span>
+                  <span class="property-specs-number"><?php echo $allRelatedProp->beds; ?></span>
+                  
+                </li>
+                <li>
+                  <span class="property-specs">Baths</span>
+                  <span class="property-specs-number"><?php echo $allRelatedProp->bath; ?></span>
+                  
+                </li>
+                <li>
+                  <span class="property-specs">SQ FT</span>
+                  <span class="property-specs-number"><?php echo $allRelatedProp->sqft; ?></span>
+                </li>
+              </ul>
             </div>
-            <img src="images/img_1.jpg" alt="Image" class="img-fluid">
-          </a>
-          <div class="p-4 property-body">
-            <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
-            <h2 class="property-title"><a href="property-details.php">625 S. Berendo St</a></h2>
-            <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> 625 S. Berendo St Unit 607 Los Angeles, CA 90005</span>
-            <strong class="property-price text-primary mb-3 d-block text-success">$2,265,500</strong>
-            <ul class="property-specs-wrap mb-3 mb-lg-0">
-              <li>
-                <span class="property-specs">Beds</span>
-                <span class="property-specs-number">2 <sup>+</sup></span>
-                
-              </li>
-              <li>
-                <span class="property-specs">Baths</span>
-                <span class="property-specs-number">2</span>
-                
-              </li>
-              <li>
-                <span class="property-specs">SQ FT</span>
-                <span class="property-specs-number">7,000</span>
-                
-              </li>
-            </ul>
-
           </div>
         </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4 mb-4">
-        <div class="property-entry h-100">
-          <a href="property-details.php" class="property-thumbnail">
-            <div class="offer-type-wrap">
-              <span class="offer-type bg-danger">Sale</span>
-              <span class="offer-type bg-success">Rent</span>
-            </div>
-            <img src="images/img_2.jpg" alt="Image" class="img-fluid">
-          </a>
-          <div class="p-4 property-body">
-            <a href="#" class="property-favorite active"><span class="icon-heart-o"></span></a>
-            <h2 class="property-title"><a href="property-details.php">871 Crenshaw Blvd</a></h2>
-            <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> 1 New York Ave, Warners Bay, NSW 2282</span>
-            <strong class="property-price text-primary mb-3 d-block text-success">$2,265,500</strong>
-            <ul class="property-specs-wrap mb-3 mb-lg-0">
-              <li>
-                <span class="property-specs">Beds</span>
-                <span class="property-specs-number">2 <sup>+</sup></span>
-                
-              </li>
-              <li>
-                <span class="property-specs">Baths</span>
-                <span class="property-specs-number">2</span>
-                
-              </li>
-              <li>
-                <span class="property-specs">SQ FT</span>
-                <span class="property-specs-number">1,620</span>
-                
-              </li>
-            </ul>
-
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4 mb-4">
-        <div class="property-entry h-100">
-          <a href="property-details.php" class="property-thumbnail">
-            <div class="offer-type-wrap">
-              <span class="offer-type bg-info">Lease</span>
-            </div>
-            <img src="images/img_3.jpg" alt="Image" class="img-fluid">
-          </a>
-          <div class="p-4 property-body">
-            <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
-            <h2 class="property-title"><a href="property-details.php">853 S Lucerne Blvd</a></h2>
-            <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> 853 S Lucerne Blvd Unit 101 Los Angeles, CA 90005</span>
-            <strong class="property-price text-primary mb-3 d-block text-success">$2,265,500</strong>
-            <ul class="property-specs-wrap mb-3 mb-lg-0">
-              <li>
-                <span class="property-specs">Beds</span>
-                <span class="property-specs-number">2 <sup>+</sup></span>
-                
-              </li>
-              <li>
-                <span class="property-specs">Baths</span>
-                <span class="property-specs-number">2</span>
-                
-              </li>
-              <li>
-                <span class="property-specs">SQ FT</span>
-                <span class="property-specs-number">5,500</span>
-                
-              </li>
-            </ul>
-
-          </div>
-        </div>
-      </div>
+      <?php endforeach; ?>
     </div>
 <?php require "includes/footer.php";?>

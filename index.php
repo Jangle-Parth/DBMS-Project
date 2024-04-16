@@ -111,7 +111,6 @@
                 <img src="images/<?php echo $prop->image; ?>" alt="Image" class="img-fluid">
               </a>
               <div class="p-4 property-body">
-                <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
                 <h2 class="property-title"><a href="property-details.php?id=<?php echo $prop->id; ?>"><?php echo $prop->name; ?></a></h2>
                 <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> <?php echo $prop->location; ?></span>
                 <strong class="property-price text-primary mb-3 d-block text-success"><?php echo $prop->price; ?></strong>
