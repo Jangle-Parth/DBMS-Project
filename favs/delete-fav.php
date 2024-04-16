@@ -9,7 +9,7 @@
         $delete = $conn->prepare("DELETE FROM favs WHERE prop_id='$prop_id' AND user_id='$user_id'");
         $delete->execute();
     
-          echo "<script>window.location.href='".APPURL."/property-details.php?id=$prop_id'</script>";
+        echo "<script>window.location.href='".APPURL."/property-details.php?id=$prop_id'</script>";
     }
 
     ?>

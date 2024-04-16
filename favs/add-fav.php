@@ -11,7 +11,5 @@
             ':user_id'=>$user_id,
             ':prop_id'=>$prop_id,
           ]);
-    
-          echo "<script>window.location.href='".APPURL."/property-details.php?id=$prop_id'</script>";
+        echo "<script>window.location.href='".APPURL."/property-details.php?id=$prop_id'</script>";
     }
-    ?>
