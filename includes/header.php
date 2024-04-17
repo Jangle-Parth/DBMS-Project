@@ -62,7 +62,7 @@
 
                 <ul class="site-menu js-clone-nav d-none d-lg-block">
                   <li class="active">
-                    <a href="index.php">Home</a>
+                    <a href="<?php echo APPURL; ?>">Home</a>
                   </li>
                   <li><a href="<?php echo APPURL; ?>/sale.php?type=sale">Buy</a></li>
                   <li><a href="<?php echo APPURL; ?>/rent.php?type=rent">Rent</a></li>
@@ -79,8 +79,10 @@
                   
                   <?php if(isset($_SESSION['username'])) : ?>
                     <li class="has-children">
-                      <a href="properties.html"><?php echo $_SESSION['username']; ?> &nbsp; &nbsp;  </a>
+                      <a href="#"><?php echo $_SESSION['username']; ?> &nbsp; &nbsp;  </a>
                       <ul class="dropdown arrow-top">
+                        <li><a href="<?php echo APPURL; ?>/user/favorites.php">Favorites</a></li>   
+                        <li><a href="<?php echo APPURL; ?>/user/requests.php">Requests</a></li>   
                         <li><a href="<?php echo APPURL; ?>/auth/logout.php">LogOut</a></li>   
                       </ul>
                     </li>
