@@ -21,18 +21,7 @@
       echo "<script>window.location.href='".ADMINURL."/admins/admins.php'</script>";
     }
   }
-
-
-
-
 ?>
-
-
-
-
-
-
-
   <div class="row">
   <div class="col">
     <div class="card">
