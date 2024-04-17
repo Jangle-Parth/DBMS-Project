@@ -13,7 +13,11 @@
     $relatedProps=$conn->query("SELECT * FROM props WHERE home_type='$allDetails->home_type' AND id !='$id'");
     $relatedProps->execute();
     $allRelatedProps=$relatedProps->fetchAll(PDO::FETCH_OBJ);    
-}
+    }
+    else{
+      echo "<script>window.location.href='".APPURL."/404.php'</script>";
+    }
+
     $images=$conn->query("SELECT * FROM related_images WHERE prop_id='$id'");
     $images->execute();
     $allImages=$images->fetchAll(PDO::FETCH_OBJ);

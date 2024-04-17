@@ -11,6 +11,9 @@
       $sale->execute();
       $allistings=$sale->fetchAll(PDO::FETCH_OBJ);
     }
+    else{
+      echo "<script>window.location.href='".APPURL."/404.php'</script>";
+    }
 
   ?>
 

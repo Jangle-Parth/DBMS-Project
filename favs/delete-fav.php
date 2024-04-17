@@ -11,5 +11,8 @@
     
         echo "<script>window.location.href='".APPURL."/property-details.php?id=$prop_id'</script>";
     }
+    else{
+        echo "<script>window.location.href='".APPURL."/404.php'</script>";
+      }
 
     ?>

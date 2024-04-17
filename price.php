@@ -11,6 +11,9 @@
       $rent->execute();
       $allistings=$rent->fetchAll(PDO::FETCH_OBJ);    
     }
+    else{
+      echo "<script>window.location.href='".APPURL."/404.php'</script>";
+    }
     
     
     if(isset($_GET['price'])){
@@ -18,6 +21,9 @@
       $price_query=$conn->query("SELECT * FROM props ORDER BY price $price");
       $price_query->execute();
       $allistingsPrice=$price_query->fetchAll(PDO::FETCH_OBJ);
+    }
+    else{
+      echo "<script>window.location.href='".APPURL."/404.php'</script>";
     }
   ?>
 
