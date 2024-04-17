@@ -5,7 +5,7 @@
 
 
 if(isset($_SESSION['username'])){
-  header("location: ".APPURL."");
+  echo "<script>window.location.href='".APPURL."'</script>";
 }
 if(isset($_POST['submit'])){
     if(empty($_POST['email']) OR empty($_POST['password'])){

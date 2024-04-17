@@ -2,6 +2,9 @@
 <?php require "../config/config.php";?>
 
 <?php
+    if(!isset($_SESSION['username'])){
+          echo "<script>window.location.href='".APPURL."'</script>";
+    }
     $favs=$conn->query("SELECT props.id AS id,props.name as name,props.location as location,props.image as image,
     props.price as price,props.beds as beds,props.bath as bath,props.sqft as sqft,
     props.type as type FROM props JOIN favs ON props.id=favs.prop_id WHERE favs.user_id='$_SESSION[id]'");

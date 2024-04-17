@@ -2,6 +2,9 @@
 <?php require "../config/config.php";?>
 
 <?php
+    if(!isset($_SESSION['username'])){
+      echo "<script>window.location.href='".APPURL."'</script>";
+}
      
     if(isset($_GET['prop_id']) AND isset($_GET['user_id'])){
         $prop_id=$_GET['prop_id'];
