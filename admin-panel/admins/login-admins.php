@@ -4,9 +4,9 @@
 <?php
 
 
-// if(isset($_SESSION['username'])){
-//   echo "<script>window.location.href='".APPURL."'</script>";
-// }
+if(isset($_SESSION['adminname'])){
+  echo "<script>window.location.href='".ADMINURL."'</script>";
+}
 if(isset($_POST['submit'])){
     if(empty($_POST['email']) OR empty($_POST['password'])){
       echo "<script>alert('some inputs are empty');</script>";
@@ -19,13 +19,10 @@ if(isset($_POST['submit'])){
       $fetch=$login->fetch(PDO::FETCH_ASSOC);
       if($login->rowCount()>0){
         if(password_verify($password,$fetch['mypassword'])){
-          // $_SESSION['username']=$fetch['username'];
-          // $_SESSION['email']=$fetch['email'];
-          // $_SESSION['id']=$fetch['id'];
-          // header("location: ".APPURL."");
-          echo "<script>alert('Logged In');</script>";  
-
-          // echo "<script>window.location.href='".APPURL."'</script>";
+          $_SESSION['adminname']=$fetch['adminname'];
+          $_SESSION['email']=$fetch['email'];
+          $_SESSION['admin_id']=$fetch['id'];
+          echo "<script>window.location.href='".ADMINURL."'</script>";
         } else{
           echo "<script>alert('Wrong Email or Password');</script>";  
         }
