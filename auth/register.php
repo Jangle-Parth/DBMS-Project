@@ -21,7 +21,6 @@
         ':email'=>$email,
         ':mypassword'=>password_hash($password,PASSWORD_DEFAULT),
       ]);
-
       echo "<script>window.location.href='".APPURL."/auth/login.php'</script>";
     }
   }

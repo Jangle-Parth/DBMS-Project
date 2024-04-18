@@ -40,10 +40,10 @@
             <a class="nav-link" href="<?php echo ADMINURL; ?>/categories-admins/show-categories.php" style="margin-left: 20px;">Categories</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="properties-admins/show-properties.html" style="margin-left: 20px;">Properties</a>
+            <a class="nav-link" href="<?php echo ADMINURL; ?>/properties-admins/show-properties.php" style="margin-left: 20px;">Properties</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="requests-admins/show-requests.html" style="margin-left: 20px;">Requests</a>
+            <a class="nav-link" href="<?php echo ADMINURL; ?>/requests-admins/show-requests.php" style="margin-left: 20px;">Requests</a>
           </li>
         </ul>
         <?php endif; ?>

@@ -5,14 +5,12 @@
     $select->execute();
     $props=$select->fetchAll(PDO::FETCH_OBJ);
 
+    if(isset($_GET['type']) OR isset($_GET['price']) OR isset($_GET['name'])){
     if(isset($_GET['type'])){
         $type=$_GET['type'];
         $rent=$conn->query("SELECT * FROM props WHERE type='$type'");
         $rent->execute();
         $allistings=$rent->fetchAll(PDO::FETCH_OBJ);    
-    }
-    else{
-      echo "<script>window.location.href='".APPURL."/404.php'</script>";
     }
 
     if(isset($_GET['price'])){
@@ -21,18 +19,14 @@
       $price_query->execute();
       $allistingsPrice=$price_query->fetchAll(PDO::FETCH_OBJ);
     }
-    else{
-      echo "<script>window.location.href='".APPURL."/404.php'</script>";
-    }
 
     if(isset($_GET['name'])){
         $name=$_GET['name'];
         $singleCategory=$conn->query("SELECT * FROM props WHERE home_type='$name'");
         $singleCategory->execute();
         $allsingleCategory=$singleCategory->fetchAll(PDO::FETCH_OBJ);
-    
-    
     }
+  }
     else{
       echo "<script>window.location.href='".APPURL."/404.php'</script>";
     }
