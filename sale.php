@@ -32,12 +32,9 @@
             </div>
           </div>
         </div>
-      </div>  
+      </div> 
       <?php endforeach; ?>
-
-     
     </div>
-
 
     <div class="site-section site-section-sm pb-0">
       <div class="container">
@@ -149,8 +146,9 @@
             </div>
           
             
-          <?php endforeach; ?> 
+         
           </div>
+          <?php endforeach; ?> 
 
         </div>
         
@@ -212,11 +210,11 @@
           <div class="col-md-6 col-lg-4 mb-5 mb-lg-5">
             <div class="team-member">
 
-              <img src="images/person_1.jpg" alt="Image" class="img-fluid rounded mb-4">
+              <img src="images/parth.jpg" alt="Image" class="img-fluid rounded mb-4">
 
               <div class="text">
 
-                <h2 class="mb-2 font-weight-light text-black h4">Megan Smith</h2>
+                <h2 class="mb-2 font-weight-light text-black h4">PARTH JANGLE</h2>
                 <span class="d-block mb-3 text-white-opacity-05">Real Estate Agent</span>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi dolorem totam non quis facere blanditiis praesentium est. Totam atque corporis nisi, veniam non. Tempore cupiditate, vitae minus obcaecati provident beatae!</p>
                 <p>
@@ -232,11 +230,11 @@
           <div class="col-md-6 col-lg-4 mb-5 mb-lg-5">
             <div class="team-member">
 
-              <img src="images/person_2.jpg" alt="Image" class="img-fluid rounded mb-4">
+              <img src="images/rhythm.jpg" alt="Image" class="img-fluid rounded mb-4">
 
               <div class="text">
 
-                <h2 class="mb-2 font-weight-light text-black h4">Brooke Cagle</h2>
+                <h2 class="mb-2 font-weight-light text-black h4">RHYTHM SHAH</h2>
                 <span class="d-block mb-3 text-white-opacity-05">Real Estate Agent</span>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, cumque vitae voluptates culpa earum similique corrupti itaque veniam doloribus amet perspiciatis recusandae sequi nihil tenetur ad, modi quos id magni!</p>
                 <p>

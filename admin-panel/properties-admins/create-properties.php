@@ -50,7 +50,7 @@ if(isset($_POST['submit'])) {
       ':type'=>$type,
       ':price_sqft'=>$price_sqft,
       ':description'=>$description,
-      ':adminname'=>$adminname,
+      ':admin_name'=>$adminname,
       ':image'=>$image,
     ]);
 
@@ -124,9 +124,9 @@ if(isset($_POST['submit'])) {
                     
                     <select name="home_type" class="form-control form-select" aria-label="Default select example">
                         <option selected>Select Home Type</option>
-                        <option value="Condo">Condo</option>
-                        <option value="Condo">Condo</option>
-                        <option value="Condo">Condo</option>
+                        <option value="Condo">Falt</option>
+                        <option value="Condo">Bunglow</option>
+                        <option value="Condo">Land</option>
                     </select>   
                     <select name="type" class="form-control mt-3 mb-4 form-select" aria-label="Default select example">
                         <option selected>Select Type</option>

@@ -13,7 +13,7 @@
         $cities=$_POST['cities'];
 
 
-        $search=$conn->query("SELECT * FROM props WHERE home_type LIKE '%$types%' OR type LIKE '%$offers%' OR location LIKE '%$cities%'");
+        $search=$conn->query("SELECT * FROM props WHERE home_type LIKE '%$types%' AND type LIKE '%$offers%' AND location LIKE '%$cities%'");
         $search->execute();
         $listings=$search->fetchAll(PDO::FETCH_OBJ);
     }
